@@ -1,4 +1,5 @@
 import Pyro4
+b=Pyro4.Proxy("PYRO:bolsa@localhost:9090")
 def pedirNumeroEntero():
  
     correcto=False
@@ -15,13 +16,9 @@ def pedirNumeroEntero():
 salir = False
 opcion = 0
 
-uri="PYRO:obj_81b638d06ced43c9829cd89831ef18d3@localhost:37191"
-llamada=Pyro4.Proxy(uri)
-llamada.inventario()
-
 while not salir:
     print ("===================================================================")
-    print("================== Almacenes tu vieja ==============================")
+    print("===========================ALMACEN==================================")
     print ("===================================================================")   
     print ("1.-REGISTRAR EN EL AMLACEN")
     print ("2.-ELIMINAR DEL AMLACEN")
@@ -34,13 +31,18 @@ while not salir:
     opcion = pedirNumeroEntero()
  
     if opcion == 1:
-        print ("Opcion 1")
+        nom=input('Ingrese el nombre del producto:')
+        cod=input('Ingrese el codigo:')
+        vist=input('Ingrese el nombre del visitante:')
+        b.ingresarArt(nom,cod,vist)
     elif opcion == 2:
-        print ("Opcion 2")
+        cod=input('Ingrese el codigo:')
+        vist=input('Ingrese el nombre del visitante:')
+        b.eliminarArt(cod,vist)
     elif opcion == 3:
-        print("Opcion 3")
+        b.inventario()
     elif opcion == 4:
-        print ("Opcion 4")
+        b.historialVisit()
     elif opcion == 5:
         salir = True
     else:
@@ -48,4 +50,3 @@ while not salir:
  
 print ("Fin")
     
-
